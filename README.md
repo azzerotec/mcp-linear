@@ -7,11 +7,11 @@
 A Model Context Protocol (MCP) server implementation for the Linear GraphQL API that enables AI assistants to interact with Linear project management systems.
 
 ![MCP Linear](https://img.shields.io/badge/MCP-Linear-blue)
-[![npm version](https://img.shields.io/npm/v/@tacticlaunch/mcp-linear.svg)](https://www.npmjs.com/package/@tacticlaunch/mcp-linear)
-[![smithery badge](https://smithery.ai/badge/@tacticlaunch/mcp-linear)](https://smithery.ai/server/@tacticlaunch/mcp-linear)
+[![npm version](https://img.shields.io/npm/v/@azzerotec/mcp-linear.svg)](https://www.npmjs.com/package/@azzerotec/mcp-linear)
+[![smithery badge](https://smithery.ai/badge/@azzerotec/mcp-linear)](https://smithery.ai/server/@azzerotec/mcp-linear)
 
-<a href="https://glama.ai/mcp/servers/@tacticlaunch/mcp-linear">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/@tacticlaunch/mcp-linear/badge" />
+<a href="https://glama.ai/mcp/servers/@azzerotec/mcp-linear">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@azzerotec/mcp-linear/badge" />
 </a>
 
 ## Features
@@ -49,18 +49,18 @@ To use MCP Linear, you'll need a Linear API token. Here's how to get one:
 6. Give your key a name (e.g., `MCP Linear Integration`)
 7. Copy the generated API token and store it securely - you won't be able to see it again!
 
-### Installing via [Smithery](https://smithery.ai/server/@tacticlaunch/mcp-linear) (Recommended)
+### Installing via [Smithery](https://smithery.ai/server/@azzerotec/mcp-linear) (Recommended)
 
 - To install MCP Linear for Cursor:
 
 ```bash
-npx -y @smithery/cli install @tacticlaunch/mcp-linear --client cursor
+npx -y @smithery/cli install @azzerotec/mcp-linear --client cursor
 ```
 
 - To install MCP Linear for Claude Desktop:
 
 ```bash
-npx -y @smithery/cli install @tacticlaunch/mcp-linear --client claude
+npx -y @smithery/cli install @azzerotec/mcp-linear --client claude
 ```
 
 ### Manual Configuration
@@ -72,7 +72,7 @@ Add the following to your MCP settings file:
   "mcpServers": {
     "linear": {
       "command": "npx",
-      "args": ["-y", "@tacticlaunch/mcp-linear"],
+      "args": ["-y", "@azzerotec/mcp-linear"],
       "env": {
         "LINEAR_API_TOKEN": "<YOUR_TOKEN>"
       }
@@ -98,7 +98,7 @@ Prerequisites
 
 ```bash
 # Install globally
-npm install -g @tacticlaunch/mcp-linear
+npm install -g @azzerotec/mcp-linear
 
 # Or clone and install locally
 git clone https://github.com/azzerotec/mcp-linear.git
@@ -132,7 +132,7 @@ See [DEVELOPMENT.md](https://github.com/azzerotec/mcp-linear/blob/main/DEVELOPME
 
 ## Related Projects
 
-[tacticlaunch/cursor-memory-bank](https://github.com/tacticlaunch/cursor-memory-bank) - If you are a developer seeking to enhance your workflow with Cursor, consider giving it a try.
+[azzerotec/cursor-memory-bank](https://github.com/azzerotec/cursor-memory-bank) - If you are a developer seeking to enhance your workflow with Cursor, consider giving it a try.
 
 ## License
 
