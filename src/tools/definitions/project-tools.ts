@@ -67,6 +67,18 @@ export const createProjectToolDefinition: MCPToolDefinition = {
         description:
           "Initial state of the project (e.g., 'planned', 'started', 'paused', 'completed', 'canceled')",
       },
+      targetDate: {
+        type: 'string',
+        description: 'Target date for the project (YYYY-MM-DD format)',
+      },
+      startDate: {
+        type: 'string',
+        description: 'Start date for the project (YYYY-MM-DD format)',
+      },
+      initiativeId: {
+        type: 'string',
+        description: 'ID of the initiative this project belongs to',
+      },
     },
     required: ['name', 'teamIds'],
   },
@@ -109,6 +121,18 @@ export const updateProjectToolDefinition: MCPToolDefinition = {
         type: 'string',
         description:
           "New state of the project (e.g., 'planned', 'started', 'paused', 'completed', 'canceled')",
+      },
+      targetDate: {
+        type: 'string',
+        description: 'New target date for the project (YYYY-MM-DD format)',
+      },
+      startDate: {
+        type: 'string',
+        description: 'New start date for the project (YYYY-MM-DD format)',
+      },
+      initiativeId: {
+        type: 'string',
+        description: 'ID of the initiative this project belongs to',
       },
     },
     required: ['id'],

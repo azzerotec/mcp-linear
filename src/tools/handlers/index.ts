@@ -42,6 +42,12 @@ import {
   handleGetActiveCycle,
   handleAddIssueToCycle,
 } from './cycle-handlers.js';
+import {
+  handleGetInitiatives,
+  handleGetInitiativeById,
+  handleCreateInitiative,
+  handleUpdateInitiative,
+} from './initiative-handlers.js';
 
 /**
  * Registers all tool handlers for the MCP Linear
@@ -97,6 +103,12 @@ export function registerToolHandlers(linearService: LinearService) {
 
     // Comment Management tools
     linear_getComments: handleGetComments(linearService),
+
+    // Initiative tools
+    linear_getInitiatives: handleGetInitiatives(linearService),
+    linear_getInitiativeById: handleGetInitiativeById(linearService),
+    linear_createInitiative: handleCreateInitiative(linearService),
+    linear_updateInitiative: handleUpdateInitiative(linearService),
   };
 }
 
@@ -142,4 +154,10 @@ export {
   handleGetCycles,
   handleGetActiveCycle,
   handleAddIssueToCycle,
+
+  // Initiative handlers
+  handleGetInitiatives,
+  handleGetInitiativeById,
+  handleCreateInitiative,
+  handleUpdateInitiative,
 };

@@ -1662,4 +1662,81 @@ export class LinearService {
       throw error;
     }
   }
+
+  async getInitiatives() {
+    const initiatives = await this.client.initiatives();
+    return initiatives.nodes.map((initiative) => ({
+      id: initiative.id,
+      name: initiative.name,
+      description: initiative.description,
+      content: initiative.content,
+      targetDate: initiative.targetDate,
+      url: initiative.url,
+    }));
+  }
+
+  async getInitiativeById(id: string) {
+    const initiative = await this.client.initiative(id);
+    if (!initiative) {
+      throw new Error(`Initiative with ID ${id} not found`);
+    }
+
+    return {
+      id: initiative.id,
+      name: initiative.name,
+      description: initiative.description,
+      content: initiative.content,
+      targetDate: initiative.targetDate,
+      url: initiative.url,
+    };
+  }
+
+  async createInitiative(args: {
+    name: string;
+    description?: string;
+    content?: string;
+    state?: string;
+    targetDate?: string;
+    startDate?: string;
+  }) {
+    const initiative = await this.client.createInitiative({
+      name: args.name,
+      description: args.description,
+      content: args.content,
+      targetDate: args.targetDate,
+    });
+
+    const initiativeData = await initiative.initiative;
+
+    return {
+      id: initiativeData?.id,
+      name: initiativeData?.name,
+      url: initiativeData?.url,
+    };
+  }
+
+  async updateInitiative(args: {
+    id: string;
+    name?: string;
+    description?: string;
+    content?: string;
+    state?: string;
+    targetDate?: string;
+    startDate?: string;
+  }) {
+    const initiative = await this.client.updateInitiative(args.id, {
+      name: args.name,
+      description: args.description,
+      content: args.content,
+      targetDate: args.targetDate,
+    });
+
+    const initiativeData = await initiative.initiative;
+
+    return {
+      id: initiativeData?.id,
+      name: initiativeData?.name,
+      url: initiativeData?.url,
+    };
+  }
 }

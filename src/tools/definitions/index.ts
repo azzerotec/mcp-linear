@@ -42,6 +42,12 @@ import {
   getActiveCycleToolDefinition,
   addIssueToCycleToolDefinition,
 } from './cycle-tools.js';
+import {
+  getInitiativesToolDefinition,
+  getInitiativeByIdToolDefinition,
+  createInitiativeToolDefinition,
+  updateInitiativeToolDefinition,
+} from './initiative-tools.js';
 
 // All tool definitions
 export const allToolDefinitions: MCPToolDefinition[] = [
@@ -92,6 +98,12 @@ export const allToolDefinitions: MCPToolDefinition[] = [
 
   // Comment Management tools
   getCommentsToolDefinition,
+
+  // Initiative tools
+  getInitiativesToolDefinition,
+  getInitiativeByIdToolDefinition,
+  createInitiativeToolDefinition,
+  updateInitiativeToolDefinition,
 ];
 
 // Export all tool definitions individually
@@ -136,4 +148,10 @@ export {
   getCyclesToolDefinition,
   getActiveCycleToolDefinition,
   addIssueToCycleToolDefinition,
+
+  // Initiative tools
+  getInitiativesToolDefinition,
+  getInitiativeByIdToolDefinition,
+  createInitiativeToolDefinition,
+  updateInitiativeToolDefinition,
 };

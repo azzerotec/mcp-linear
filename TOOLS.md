@@ -101,16 +101,16 @@ The following tools are recommended for future implementation to enhance the cap
 
 ### Initiative Management
 
-| Tool Name                            | Description                           | Priority | Status     |
-| ------------------------------------ | ------------------------------------- | -------- | ---------- |
-| `linear_getInitiatives`              | Get a list of initiatives from Linear | High     | 📝 Planned |
-| `linear_getInitiativeById`           | Get details of a specific initiative  | High     | 📝 Planned |
-| `linear_createInitiative`            | Create a new initiative               | High     | 📝 Planned |
-| `linear_updateInitiative`            | Update an existing initiative         | Medium   | 📝 Planned |
-| `linear_archiveInitiative`           | Archive an initiative                 | Medium   | 📝 Planned |
-| `linear_addProjectToInitiative`      | Add a project to an initiative        | High     | 📝 Planned |
-| `linear_removeProjectFromInitiative` | Remove a project from an initiative   | Medium   | 📝 Planned |
-| `linear_getInitiativeProjects`       | Get all projects in an initiative     | High     | 📝 Planned |
+| Tool Name                            | Description                           | Priority | Status         |
+| ------------------------------------ | ------------------------------------- | -------- | -------------- |
+| `linear_getInitiatives`              | Get a list of initiatives from Linear | High     | ✅ Implemented |
+| `linear_getInitiativeById`           | Get details of a specific initiative  | High     | ✅ Implemented |
+| `linear_createInitiative`            | Create a new initiative               | High     | ✅ Implemented |
+| `linear_updateInitiative`            | Update an existing initiative         | Medium   | ✅ Implemented |
+| `linear_archiveInitiative`           | Archive an initiative                 | Medium   | 📝 Planned     |
+| `linear_addProjectToInitiative`      | Add a project to an initiative        | High     | 📝 Planned     |
+| `linear_removeProjectFromInitiative` | Remove a project from an initiative   | Medium   | 📝 Planned     |
+| `linear_getInitiativeProjects`       | Get all projects in an initiative     | High     | 📝 Planned     |
 
 ### Cycle Management
 

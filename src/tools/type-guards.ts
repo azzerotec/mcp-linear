@@ -207,6 +207,9 @@ export function isCreateProjectArgs(args: unknown): args is {
   content?: string;
   teamIds: string[];
   state?: string;
+  targetDate?: string;
+  startDate?: string;
+  initiativeId?: string;
 } {
   return (
     typeof args === 'object' &&
@@ -427,6 +430,9 @@ export function isUpdateProjectArgs(args: unknown): args is {
   description?: string;
   content?: string;
   state?: string;
+  targetDate?: string;
+  startDate?: string;
+  initiativeId?: string;
 } {
   return (
     typeof args === 'object' &&
@@ -544,4 +550,68 @@ export function isGetWorkflowStatesArgs(args: unknown): args is {
   }
 
   return true;
+}
+
+/**
+ * Type guard for linear_getInitiativeById tool arguments
+ */
+export function isGetInitiativeByIdArgs(args: unknown): args is { id: string } {
+  if (typeof args !== 'object' || args === null) {
+    return false;
+  }
+
+  const { id } = args as { id: string };
+  return typeof id === 'string';
+}
+
+/**
+ * Type guard for linear_createInitiative tool arguments
+ */
+export function isCreateInitiativeArgs(args: unknown): args is {
+  name: string;
+  description?: string;
+  content?: string;
+  state?: string;
+  targetDate?: string;
+  startDate?: string;
+} {
+  return (
+    typeof args === 'object' &&
+    args !== null &&
+    'name' in args &&
+    typeof (args as { name: string }).name === 'string' &&
+    (!('description' in args) ||
+      typeof (args as { description: string }).description === 'string') &&
+    (!('content' in args) || typeof (args as { content: string }).content === 'string') &&
+    (!('state' in args) || typeof (args as { state: string }).state === 'string') &&
+    (!('targetDate' in args) || typeof (args as { targetDate: string }).targetDate === 'string') &&
+    (!('startDate' in args) || typeof (args as { startDate: string }).startDate === 'string')
+  );
+}
+
+/**
+ * Type guard for linear_updateInitiative tool arguments
+ */
+export function isUpdateInitiativeArgs(args: unknown): args is {
+  id: string;
+  name?: string;
+  description?: string;
+  content?: string;
+  state?: string;
+  targetDate?: string;
+  startDate?: string;
+} {
+  return (
+    typeof args === 'object' &&
+    args !== null &&
+    'id' in args &&
+    typeof (args as { id: string }).id === 'string' &&
+    (!('name' in args) || typeof (args as { name: string }).name === 'string') &&
+    (!('description' in args) ||
+      typeof (args as { description: string }).description === 'string') &&
+    (!('content' in args) || typeof (args as { content: string }).content === 'string') &&
+    (!('state' in args) || typeof (args as { state: string }).state === 'string') &&
+    (!('targetDate' in args) || typeof (args as { targetDate: string }).targetDate === 'string') &&
+    (!('startDate' in args) || typeof (args as { startDate: string }).startDate === 'string')
+  );
 }

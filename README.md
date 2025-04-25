@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/tacticlaunch/mcp-linear/blob/main/docs/linear-app-icon.png?raw=true" alt="Linear App Icon" width="250" height="250">
+  <img src="https://github.com/azzerotec/mcp-linear/blob/main/docs/linear-app-icon.png?raw=true" alt="Linear App Icon" width="250" height="250">
 </p>
 
 # MCP Linear
@@ -101,7 +101,7 @@ Prerequisites
 npm install -g @tacticlaunch/mcp-linear
 
 # Or clone and install locally
-git clone https://github.com/tacticlaunch/mcp-linear.git
+git clone https://github.com/azzerotec/mcp-linear.git
 cd mcp-linear
 npm install
 npm link  # Makes the package available globally
@@ -124,16 +124,15 @@ mcp-linear
 
 ## Available Tools
 
-See [TOOLS.md](https://github.com/tacticlaunch/mcp-linear/blob/main/TOOLS.md) for a complete list of available tools and planned features.
+See [TOOLS.md](https://github.com/azzerotec/mcp-linear/blob/main/TOOLS.md) for a complete list of available tools and planned features.
 
 ## Development
 
-See [DEVELOPMENT.md](https://github.com/tacticlaunch/mcp-linear/blob/main/DEVELOPMENT.md) for more information on how to develop locally.
+See [DEVELOPMENT.md](https://github.com/azzerotec/mcp-linear/blob/main/DEVELOPMENT.md) for more information on how to develop locally.
 
-## Links
+## Related Projects
 
 [tacticlaunch/cursor-memory-bank](https://github.com/tacticlaunch/cursor-memory-bank) - If you are a developer seeking to enhance your workflow with Cursor, consider giving it a try.
-
 
 ## License
 
