@@ -615,3 +615,59 @@ export function isUpdateInitiativeArgs(args: unknown): args is {
     (!('startDate' in args) || typeof (args as { startDate: string }).startDate === 'string')
   );
 }
+
+/**
+ * Type guard for linear_createProjectDependency tool arguments
+ */
+export function isCreateProjectDependencyArgs(
+  args: unknown,
+): args is { blockingProjectId: string; blockedProjectId: string } {
+  return (
+    typeof args === 'object' &&
+    args !== null &&
+    typeof (args as any).blockingProjectId === 'string' &&
+    typeof (args as any).blockedProjectId === 'string'
+  );
+}
+
+/**
+ * Type guard for linear_removeProjectDependency tool arguments
+ */
+export function isRemoveProjectDependencyArgs(
+  args: unknown,
+): args is { blockingProjectId: string; blockedProjectId: string } {
+  return (
+    typeof args === 'object' &&
+    args !== null &&
+    typeof (args as any).blockingProjectId === 'string' &&
+    typeof (args as any).blockedProjectId === 'string'
+  );
+}
+
+/**
+ * Type guard for linear_linkInitiativeToProject tool arguments
+ */
+export function isLinkInitiativeToProjectArgs(
+  args: unknown,
+): args is { projectId: string; initiativeId: string } {
+  return (
+    typeof args === 'object' &&
+    args !== null &&
+    typeof (args as any).projectId === 'string' &&
+    typeof (args as any).initiativeId === 'string'
+  );
+}
+
+/**
+ * Type guard for linear_unlinkInitiativeFromProject tool arguments
+ */
+export function isUnlinkInitiativeFromProjectArgs(
+  args: unknown,
+): args is { projectId: string; initiativeId: string } {
+  return (
+    typeof args === 'object' &&
+    args !== null &&
+    typeof (args as any).projectId === 'string' &&
+    typeof (args as any).initiativeId === 'string'
+  );
+}

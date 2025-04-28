@@ -260,3 +260,59 @@ export const getProjectIssuesToolDefinition: MCPToolDefinition = {
     },
   },
 };
+
+/**
+ * Tool definition for creating a project dependency
+ */
+export const createProjectDependencyToolDefinition = {
+  name: 'linear_createProjectDependency',
+  description: 'Create a dependency between two projects (blocking -> blocked)',
+  input_schema: {
+    type: 'object',
+    properties: {
+      blockingProjectId: {
+        type: 'string',
+        description: 'ID of the project that is blocking',
+      },
+      blockedProjectId: {
+        type: 'string',
+        description: 'ID of the project that is blocked by the blocking project',
+      },
+    },
+    required: ['blockingProjectId', 'blockedProjectId'],
+  },
+  output_schema: {
+    type: 'object',
+    properties: {
+      success: { type: 'boolean' },
+      dependencyId: { type: 'string' },
+      blockingProjectId: { type: 'string' },
+      blockedProjectId: { type: 'string' },
+    },
+  },
+};
+
+/**
+ * Tool definition for removing a project dependency
+ */
+export const removeProjectDependencyToolDefinition = {
+  name: 'linear_removeProjectDependency',
+  description: 'Remove a dependency between two projects by dependency ID',
+  input_schema: {
+    type: 'object',
+    properties: {
+      dependencyId: {
+        type: 'string',
+        description: 'ID of the dependency to remove',
+      },
+    },
+    required: ['dependencyId'],
+  },
+  output_schema: {
+    type: 'object',
+    properties: {
+      success: { type: 'boolean' },
+      dependencyId: { type: 'string' },
+    },
+  },
+};

@@ -28,6 +28,8 @@ import {
   handleUpdateProject,
   handleAddIssueToProject,
   handleGetProjectIssues,
+  handleCreateProjectDependency,
+  handleRemoveProjectDependency,
 } from './project-handlers.js';
 import { handleGetTeams, handleGetWorkflowStates } from './team-handlers.js';
 import {
@@ -47,6 +49,8 @@ import {
   handleGetInitiativeById,
   handleCreateInitiative,
   handleUpdateInitiative,
+  handleLinkInitiativeToProject,
+  handleUnlinkInitiativeFromProject,
 } from './initiative-handlers.js';
 
 /**
@@ -74,6 +78,8 @@ export function registerToolHandlers(linearService: LinearService) {
     linear_updateProject: handleUpdateProject(linearService),
     linear_addIssueToProject: handleAddIssueToProject(linearService),
     linear_getProjectIssues: handleGetProjectIssues(linearService),
+    linear_createProjectDependency: handleCreateProjectDependency(linearService),
+    linear_removeProjectDependency: handleRemoveProjectDependency(linearService),
 
     // Cycle Management tools
     linear_getCycles: handleGetCycles(linearService),
@@ -109,6 +115,8 @@ export function registerToolHandlers(linearService: LinearService) {
     linear_getInitiativeById: handleGetInitiativeById(linearService),
     linear_createInitiative: handleCreateInitiative(linearService),
     linear_updateInitiative: handleUpdateInitiative(linearService),
+    linear_linkInitiativeToProject: handleLinkInitiativeToProject(linearService),
+    linear_unlinkInitiativeFromProject: handleUnlinkInitiativeFromProject(linearService),
   };
 }
 
@@ -149,6 +157,8 @@ export {
   handleUpdateProject,
   handleAddIssueToProject,
   handleGetProjectIssues,
+  handleCreateProjectDependency,
+  handleRemoveProjectDependency,
 
   // Cycle Management handlers
   handleGetCycles,
@@ -160,4 +170,6 @@ export {
   handleGetInitiativeById,
   handleCreateInitiative,
   handleUpdateInitiative,
+  handleLinkInitiativeToProject,
+  handleUnlinkInitiativeFromProject,
 };

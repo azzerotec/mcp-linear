@@ -1,4 +1,6 @@
 import { LinearClient } from '@linear/sdk';
+import { ProjectRelationCreateInput } from '@linear/sdk/dist/_generated_documents.js';
+import { GraphQLClient } from 'graphql-request';
 
 // Define Linear API service
 export class LinearService {
@@ -1844,6 +1846,61 @@ export class LinearService {
     } catch (error) {
       console.error('Error unlinking initiative from project:', error);
       throw error;
+    }
+  }
+
+  /**
+   * Creates a dependency between two projects (blocking -> blocked)
+   * @param blockingProjectId The project that is blocking
+   * @param blockedProjectId The project that is blocked by the blocking project
+   * @returns The created dependency's id and involved project ids
+   */
+  async createProjectDependency(blockingProjectId: string, blockedProjectId: string) {
+    const dependency = await this.client.createProjectRelation({
+      projectId: blockingProjectId,
+      relatedProjectId: blockedProjectId,
+      anchorType: 'end',
+      relatedAnchorType: 'start',
+      type: 'dependency',
+    });
+
+    return {
+      success: true,
+      dependencyId: dependency.projectRelationId,
+      blockingProjectId,
+      blockedProjectId,
+    };
+  }
+
+  /**
+   * Removes a dependency between two projects
+   * @param dependencyId The id of the dependency to remove
+   * @returns Success status and the removed dependency id
+   */
+  async removeProjectDependency(blockingProjectId: string, blockedProjectId: string) {
+    const dependencies = await this.client.projectRelations();
+    const dependency = dependencies.nodes.find(
+      (dependency) =>
+        dependency.projectId === blockingProjectId &&
+        dependency.relatedProjectId === blockedProjectId &&
+        dependency.anchorType === 'end',
+    );
+
+    if (!dependency) {
+      throw new Error(`Dependency between ${blockingProjectId} and ${blockedProjectId} not found`);
+    }
+
+    const updatePayload = await this.client.deleteProjectRelation(dependency.id);
+
+    if (updatePayload.success) {
+      return {
+        success: true,
+        dependencyId: dependency.id,
+        blockingProjectId,
+        blockedProjectId,
+      };
+    } else {
+      throw new Error('Failed to remove project dependency');
     }
   }
 }

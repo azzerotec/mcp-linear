@@ -3,6 +3,8 @@ import {
   isCreateProjectArgs,
   isGetProjectIssuesArgs,
   isUpdateProjectArgs,
+  isCreateProjectDependencyArgs,
+  isRemoveProjectDependencyArgs,
 } from '../type-guards.js';
 import { LinearService } from '../../services/linear-service.js';
 import { logError } from '../../utils/config.js';
@@ -88,6 +90,46 @@ export function handleGetProjectIssues(linearService: LinearService) {
       return await linearService.getProjectIssues(args.projectId, args.limit);
     } catch (error) {
       logError('Error getting project issues', error);
+      throw error;
+    }
+  };
+}
+
+/**
+ * Handler for creating a project dependency
+ */
+export function handleCreateProjectDependency(linearService: LinearService) {
+  return async (args: unknown) => {
+    try {
+      if (!isCreateProjectDependencyArgs(args)) {
+        throw new Error('Invalid arguments for createProjectDependency');
+      }
+      return await linearService.createProjectDependency(
+        args.blockingProjectId,
+        args.blockedProjectId,
+      );
+    } catch (error) {
+      logError('Error creating project dependency', error);
+      throw error;
+    }
+  };
+}
+
+/**
+ * Handler for removing a project dependency
+ */
+export function handleRemoveProjectDependency(linearService: LinearService) {
+  return async (args: unknown) => {
+    try {
+      if (!isRemoveProjectDependencyArgs(args)) {
+        throw new Error('Invalid arguments for removeProjectDependency');
+      }
+      return await linearService.removeProjectDependency(
+        args.blockingProjectId,
+        args.blockedProjectId,
+      );
+    } catch (error) {
+      logError('Error removing project dependency', error);
       throw error;
     }
   };
