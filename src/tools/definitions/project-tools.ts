@@ -77,7 +77,8 @@ export const createProjectToolDefinition: MCPToolDefinition = {
       },
       initiativeId: {
         type: 'string',
-        description: 'ID of the initiative this project belongs to',
+        description:
+          'ID of the initiative to automatically link this project to. The project will be linked to this initiative upon creation.',
       },
     },
     required: ['name', 'teamIds'],
@@ -87,7 +88,22 @@ export const createProjectToolDefinition: MCPToolDefinition = {
     properties: {
       id: { type: 'string' },
       name: { type: 'string' },
+      description: { type: 'string' },
+      content: { type: 'string' },
+      state: { type: 'string' },
+      startDate: { type: 'string' },
+      targetDate: { type: 'string' },
+      lead: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+        },
+      },
+      icon: { type: 'string' },
+      color: { type: 'string' },
       url: { type: 'string' },
+      initiativeToProjectId: { type: 'string' },
     },
   },
 };
@@ -132,7 +148,8 @@ export const updateProjectToolDefinition: MCPToolDefinition = {
       },
       initiativeId: {
         type: 'string',
-        description: 'ID of the initiative this project belongs to',
+        description:
+          'ID of the initiative to automatically link this project to. If provided, the project will be linked to this initiative as part of the update.',
       },
     },
     required: ['id'],
@@ -143,8 +160,21 @@ export const updateProjectToolDefinition: MCPToolDefinition = {
       id: { type: 'string' },
       name: { type: 'string' },
       description: { type: 'string' },
+      content: { type: 'string' },
       state: { type: 'string' },
+      startDate: { type: 'string' },
+      targetDate: { type: 'string' },
+      lead: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+        },
+      },
+      icon: { type: 'string' },
+      color: { type: 'string' },
       url: { type: 'string' },
+      initiativeToProjectId: { type: 'string' },
     },
   },
 };

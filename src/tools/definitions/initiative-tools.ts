@@ -132,7 +132,8 @@ export const updateInitiativeToolDefinition: MCPToolDefinition = {
       },
       state: {
         type: 'string',
-        description: "New state of the initiative (e.g., 'planned', 'active', 'completed', 'canceled')",
+        description:
+          "New state of the initiative (e.g., 'planned', 'active', 'completed', 'canceled')",
       },
       targetDate: {
         type: 'string',
@@ -151,6 +152,68 @@ export const updateInitiativeToolDefinition: MCPToolDefinition = {
       id: { type: 'string' },
       name: { type: 'string' },
       url: { type: 'string' },
+    },
+  },
+};
+
+/**
+ * Tool definition for linking an initiative to a project
+ */
+export const linkInitiativeToProjectToolDefinition: MCPToolDefinition = {
+  name: 'linear_linkInitiativeToProject',
+  description: 'Links an initiative to a project',
+  input_schema: {
+    type: 'object',
+    properties: {
+      projectId: {
+        type: 'string',
+        description: 'ID of the project',
+      },
+      initiativeId: {
+        type: 'string',
+        description: 'ID of the initiative to link',
+      },
+    },
+    required: ['projectId', 'initiativeId'],
+  },
+  output_schema: {
+    type: 'object',
+    properties: {
+      success: { type: 'boolean' },
+      projectId: { type: 'string' },
+      initiativeId: { type: 'string' },
+      initiativeToProjectId: { type: 'string' },
+    },
+  },
+};
+
+/**
+ * Tool definition for unlinking an initiative from a project
+ */
+export const unlinkInitiativeFromProjectToolDefinition: MCPToolDefinition = {
+  name: 'linear_unlinkInitiativeFromProject',
+  description: 'Unlinks an initiative from a project',
+  input_schema: {
+    type: 'object',
+    properties: {
+      projectId: {
+        type: 'string',
+        description: 'ID of the project',
+      },
+      initiativeId: {
+        type: 'string',
+        description: 'ID of the initiative to unlink',
+      },
+    },
+    required: ['projectId', 'initiativeId'],
+  },
+  output_schema: {
+    type: 'object',
+    properties: {
+      success: { type: 'boolean' },
+      projectId: { type: 'string' },
+      initiativeId: { type: 'string' },
+      relationId: { type: 'string' },
     },
   },
 };

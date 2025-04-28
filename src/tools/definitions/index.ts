@@ -47,6 +47,9 @@ import {
   getInitiativeByIdToolDefinition,
   createInitiativeToolDefinition,
   updateInitiativeToolDefinition,
+  // Initiative-Project Linking tools
+  linkInitiativeToProjectToolDefinition,
+  unlinkInitiativeFromProjectToolDefinition,
 } from './initiative-tools.js';
 
 // All tool definitions
@@ -104,6 +107,8 @@ export const allToolDefinitions: MCPToolDefinition[] = [
   getInitiativeByIdToolDefinition,
   createInitiativeToolDefinition,
   updateInitiativeToolDefinition,
+  linkInitiativeToProjectToolDefinition,
+  unlinkInitiativeFromProjectToolDefinition,
 ];
 
 // Export all tool definitions individually
@@ -154,4 +159,6 @@ export {
   getInitiativeByIdToolDefinition,
   createInitiativeToolDefinition,
   updateInitiativeToolDefinition,
+  linkInitiativeToProjectToolDefinition,
+  unlinkInitiativeFromProjectToolDefinition,
 };
