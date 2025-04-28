@@ -548,6 +548,7 @@ export class LinearService {
     sortOrder?: number;
     icon?: string;
     color?: string;
+    initiativeId?: string;
   }) {
     const teamIds = Array.isArray(args.teamIds) ? args.teamIds : [args.teamIds];
     const memberIds = args.memberIds
@@ -561,7 +562,6 @@ export class LinearService {
       description: args.description,
       content: args.content,
       teamIds: teamIds,
-      state: args.state,
       startDate: args.startDate ? new Date(args.startDate) : undefined,
       targetDate: args.targetDate ? new Date(args.targetDate) : undefined,
       leadId: args.leadId,
@@ -574,6 +574,16 @@ export class LinearService {
     if (createdProject.success && createdProject.project) {
       const projectData = await createdProject.project;
       const leadData = projectData.lead ? await projectData.lead : null;
+      let initiativeToProjectId: string | undefined;
+
+      if (args.initiativeId && projectData.id) {
+        const initiativeToProject = await this.linkInitiativeToProject(
+          projectData.id,
+          args.initiativeId,
+        );
+
+        initiativeToProjectId = initiativeToProject?.initiativeToProjectId;
+      }
 
       return {
         id: projectData.id,
@@ -592,6 +602,7 @@ export class LinearService {
         icon: projectData.icon,
         color: projectData.color,
         url: projectData.url,
+        initiativeToProjectId,
       };
     } else {
       throw new Error('Failed to create project');
@@ -1088,6 +1099,7 @@ export class LinearService {
     sortOrder?: number;
     icon?: string;
     color?: string;
+    initiativeId?: string;
   }) {
     try {
       // Get the project
@@ -1108,7 +1120,6 @@ export class LinearService {
         name: args.name,
         description: args.description,
         content: args.content,
-        state: args.state as any,
         startDate: args.startDate ? new Date(args.startDate) : undefined,
         targetDate: args.targetDate ? new Date(args.targetDate) : undefined,
         leadId: args.leadId,
@@ -1122,6 +1133,17 @@ export class LinearService {
         // Get the updated project data
         const updatedProject = await this.client.project(args.id);
         const leadData = updatedProject.lead ? await updatedProject.lead : null;
+
+        let initiativeToProjectId: string | undefined;
+
+        if (args.initiativeId && updatedProject.id) {
+          const initiativeToProject = await this.linkInitiativeToProject(
+            updatedProject.id,
+            args.initiativeId,
+          );
+
+          initiativeToProjectId = initiativeToProject?.initiativeToProjectId;
+        }
 
         // Return the updated project info
         return {
@@ -1141,6 +1163,7 @@ export class LinearService {
           icon: updatedProject.icon,
           color: updatedProject.color,
           url: updatedProject.url,
+          initiativeToProjectId,
         };
       } else {
         throw new Error('Failed to update project');
@@ -1738,5 +1761,89 @@ export class LinearService {
       name: initiativeData?.name,
       url: initiativeData?.url,
     };
+  }
+
+  /**
+   * Links an initiative to a project
+   * @param projectId ID of the project
+   * @param initiativeId ID of the initiative to link
+   */
+  async linkInitiativeToProject(projectId: string, initiativeId: string) {
+    try {
+      // Get the project and initiative to verify they exist
+      const project = await this.client.project(projectId);
+      const initiative = await this.client.initiative(initiativeId);
+
+      if (!project) {
+        throw new Error(`Project with ID ${projectId} not found`);
+      }
+      if (!initiative) {
+        throw new Error(`Initiative with ID ${initiativeId} not found`);
+      }
+
+      const relation = await this.client.createInitiativeToProject({
+        initiativeId,
+        projectId,
+      });
+
+      if (relation.success) {
+        return {
+          projectId,
+          initiativeId,
+          initiativeToProjectId: relation.initiativeToProjectId,
+          success: true,
+        };
+      } else {
+        throw new Error(`Failed to link initiative ${initiativeId} to project ${projectId}`);
+      }
+    } catch (error) {
+      console.error('Error linking initiative to project:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Unlinks an initiative from a project
+   * @param projectId ID of the project
+   * @param initiativeId ID of the initiative to unlink
+   */
+  async unlinkInitiativeFromProject(projectId: string, initiativeId: string) {
+    try {
+      // Get the project and initiative to verify they exist
+      const project = await this.client.project(projectId);
+      const initiative = await this.client.initiative(initiativeId);
+
+      if (!project) {
+        throw new Error(`Project with ID ${projectId} not found`);
+      }
+      if (!initiative) {
+        throw new Error(`Initiative with ID ${initiativeId} not found`);
+      }
+
+      const realtions = await this.client.initiativeToProjects();
+      const relation = realtions.nodes.find(
+        (relation) => relation.projectId === projectId && relation.initiativeId === initiativeId,
+      );
+
+      if (!relation) {
+        throw new Error(`Initiative ${initiativeId} is not linked to project ${projectId}`);
+      }
+
+      const updatePayload = await this.client.deleteInitiativeToProject(relation.id);
+
+      if (updatePayload.success) {
+        return {
+          projectId,
+          initiativeId,
+          relationId: relation.id,
+          success: true,
+        };
+      } else {
+        throw new Error('Failed to unlink initiative from project');
+      }
+    } catch (error) {
+      console.error('Error unlinking initiative from project:', error);
+      throw error;
+    }
   }
 }
